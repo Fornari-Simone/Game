@@ -1,8 +1,9 @@
 let nConnection = 0;
 let express = require("express");
 let socket = require("socket.io");
+let dotenv = require("dotenv").config();
 let app = express();
-let server = app.listen(3000);
+let server = app.listen(process.env.PORT || 3000);
 app.use(express.static('public'));
 
 let io = socket(server);
@@ -20,5 +21,3 @@ io.sockets.on('connection', socket => {
         socket.broadcast.emit('change', data)
     })
 })
-
-//socket.client.server.eio
