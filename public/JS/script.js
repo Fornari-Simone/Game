@@ -4,7 +4,6 @@ let player2;
 let player;
 let canvas = document.getElementById("Sprite")
 let ctx = canvas.getContext("2d")
-console.log(process.env.PORT)
 socket.on("port", data => {console.log(data)})
 socket.on("access", data => {
     console.log(data)
