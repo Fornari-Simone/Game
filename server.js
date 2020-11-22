@@ -4,6 +4,7 @@ let socket = require("socket.io");
 let dotenv = require("dotenv").config();
 let app = express();
 let server = app.listen(process.env.PORT || 3000);
+console.log(process.env.PORT)
 app.use(express.static('public'));
 
 let io = socket(server);
