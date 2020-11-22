@@ -9,6 +9,7 @@ app.use(express.static('public'));
 let io = socket(server);
 io.sockets.on('connection', socket => {
     console.log(`${nConnection}, id=${socket.id}`)
+    io.sockets.emit("port", process.env.PORT)
     io.sockets.emit("access", nConnection);
     nConnection++;
     socket.on('disconnect', reason => {
