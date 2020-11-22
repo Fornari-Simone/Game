@@ -1,9 +1,10 @@
 
-let socket = io.connect("http://localhost:3000")
+let socket = io.connect(`https://game-forno.herokuapp.com:${process.env.PORT}`)
 let player2;
 let player;
 let canvas = document.getElementById("Sprite")
 let ctx = canvas.getContext("2d")
+console.log(process.env.PORT)
 socket.on("access", data => {
     console.log(data)
     if(data === 1 && player != null){
