@@ -1,5 +1,6 @@
 
 let socket = io.connect(`https://game-forno.herokuapp.com`)
+
 let player2;
 let player;
 let canvas = document.getElementById("Sprite")
