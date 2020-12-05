@@ -95,7 +95,7 @@ let gameSetting = () => {
         if(event.code == "KeyA"){
             player._move = false
         }
-        if(event.code == "KeyF"){
+        if(event.button == "0"){
             player._attack = true
         }
     })
