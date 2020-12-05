@@ -1,0 +1,9 @@
+context.drawImage(new Image(path_image), 
+                  big_image_x, // ex. idle[0].location.x
+                  big_image_y, // ex. idle[0].location.y
+                  big_image_width, // ex. idle[0].width
+                  big_image_height, // ex. idle[0].height
+                  canvas_x, 
+                  canvas_y,
+                  width_modify_on_canvas,
+		  height_modify_on_canvas)
