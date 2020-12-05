@@ -11,7 +11,7 @@ io.sockets.on('connection', socket => {
     console.log(`${nConnection}, id=${socket.id}`)
     io.sockets.emit("port", process.env.PORT)
     io.sockets.emit("access", nConnection);
-    if(nConnection++ > 1) {
+    if(nConnection++ > 2) {
         socket.connection.end()
     }
     nConnection++;
