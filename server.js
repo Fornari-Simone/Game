@@ -9,12 +9,13 @@ app.use(express.static('public'));
 let io = socket(server);
 io.sockets.on('connection', socket => {
     console.log(`${nConnection}, id=${socket.id}`)
-    io.sockets.emit("port", process.env.PORT)
     io.sockets.emit("access", nConnection);
-    if(nConnection++ > 2) {
-        socket.connection.end()
-    }
     nConnection++;
+    console.log(nConnection)
+    if(nConnection > 1) {
+        nConnection--;
+        return; 
+    }
     socket.on('disconnect', reason => {
         console.log(reason)
         nConnection--;

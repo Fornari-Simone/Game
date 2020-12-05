@@ -1,11 +1,11 @@
 
-let socket = io.connect(`https://game-forno.herokuapp.com`)
+//let socket = io.connect(`https://game-forno.herokuapp.com`)
+let socket = io.connect(`http://localhost:3000/`)
 
 let player2;
 let player;
 let canvas = document.getElementById("Sprite")
 let ctx = canvas.getContext("2d")
-socket.on("port", data => {console.log(data)})
 socket.on("access", data => {
     console.log(data)
     if(data === 1 && player != null){
@@ -24,8 +24,8 @@ socket.on("disconn", data => {
 })
 socket.on("change", data => {
     player2 = player.constructor.name == "Ichigo" ? 
-    new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true) :
-    new Ichigo(canvas.height - 40, 0, 55, 40, false);
+        new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true) :
+        new Ichigo(canvas.height - 40, 0, 55, 40, false);
     player2._top = data._top;
     player2._left = data._left;
     player2._bottom = data._bottom;
@@ -42,18 +42,22 @@ socket.on("change", data => {
     player2._vel.x = data._vel.x;
     player2._vel.y = data._vel.y;
     player2._actualSprite = data._actualSprite;
+    console.log(player2)
 })
 
-let loop = () => {
+function loop(){
+    console.log(player == null || player2 == null)
     if(player == null || player2 == null) {
         //ctx.font = "30px Comic Sans MS";
         //ctx.fillStyle = "green"
         //ctx.textAlign = "center";
         //ctx.fillText(`Wait of another player`, canvas.width/2, canvas.height/2)
         window.requestAnimationFrame(loop);
+        console.log("hello")
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     player.updSprite(player2)
+    console.log(player2)
     player.jump()
     player.drawSprite(ctx) 
     player2.drawSprite(ctx)
@@ -65,7 +69,7 @@ let loop = () => {
     if(player._life[0] <= 0) player2.drawWin(ctx, "red")
     else if(player2._life[0] <= 0) player.drawWin(ctx, "blue")
     else{
-        socket.emit('change',player)
+        socket.emit('change', player)
         window.requestAnimationFrame(loop)
     }
 }

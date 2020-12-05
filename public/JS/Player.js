@@ -40,7 +40,7 @@ class Player {
             jumpDw: this._spriteCorToRev(this._sprite.jumpDw[0], this._sprite.jumpDw[1]),
             attack: this._spriteCorToRev(this._sprite.attack[0], this._sprite.attack[1]),
         }
-        this._actualSprite = this._sprite.static
+        this._actualSprite = this._reverse ? this._revSprite.static : this._sprite.static;
     }
 
     set bottom(newBottom){
