@@ -103,5 +103,10 @@ let gameSetting = () => {
             player._attack = true
         }
     })
+    window.addEventListener("mousedown", () => {
+        if(event.button == "0"){
+            player._attack = true
+        }
+    })
     loop()
 }
