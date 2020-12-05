@@ -23,6 +23,7 @@ socket.on("disconn", data => {
     if(data === 1) player2 == null;
 })
 socket.on("change", data => {
+    //I DATI DEL SECONDO PLAYER NON ARRIVANO AL PRIMO
     player2 = player.constructor.name == "Ichigo" ? 
         new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true) :
         new Ichigo(canvas.height - 40, 0, 55, 40, false);
