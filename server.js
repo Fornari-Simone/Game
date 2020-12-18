@@ -16,6 +16,7 @@ io.sockets.on('connection', socket => {
         nConnection++;
     }
     else socket.emit('GoAway', "");
+    
     socket.on('disconnect', reason => {
         if(ids.indexOf(socket.id) != -1){
             nConnection--;
