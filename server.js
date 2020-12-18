@@ -15,10 +15,12 @@ io.sockets.on('connection', socket => {
         ids.push(socket.id)
         nConnection++;
     }
-    //else socket.broadcast.to(socket.id).emit('GoAway', "");
+    else socket.emit('GoAway', "");
     socket.on('disconnect', reason => {
-        nConnection--;
-        io.sockets.emit("disconn", nConnection)
+        if(ids.indexOf(socket.id) != -1){
+            nConnection--;
+            io.sockets.emit("disconn", nConnection)
+        }
     })
 
     socket.on('change', (id, data) => {

@@ -26,7 +26,12 @@ socket.on("access", (nConn, id) => {
 })
 socket.on("GoAway", data => GoAway=true)
 socket.on("disconn", data => {
-    if(data === 1) player2 == null;
+    player2 = null;
+    if (player.constructor.name == "Ichigo") {
+        player = new Ichigo(canvas.height - 40, 0, 55, 40, false)
+    }else{
+        player = new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true)
+    }
 })
 socket.on("change", data => {
     player2._top = data[0]
@@ -45,7 +50,14 @@ socket.on("change", data => {
 })
 
 function loop(){
-    if(player == null || player2 == null) {
+    if(GoAway){
+        ctx.font = "15px Comic Sans MS";
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center";
+        ctx.fillText(`Il canale è già occupato`, canvas.width/2, canvas.height/2);
+        return;
+    }else if(player == null || player2 == null) {
+        console.log("hello")
         window.requestAnimationFrame(loop);
     }else{
         ctx.clearRect(0, 0, canvas.width, canvas.height)
