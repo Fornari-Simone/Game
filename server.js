@@ -4,25 +4,25 @@ let socket = require("socket.io");
 let dotenv = require("dotenv").config();
 let app = express();
 let server = app.listen(process.env.PORT || 3000);
-app.use(express.static('public'));
 
+let ids = [];
+app.use(express.static('public'));
+let lastID = "";
 let io = socket(server);
 io.sockets.on('connection', socket => {
-    console.log(`${nConnection}, id=${socket.id}`)
-    io.sockets.emit("access", nConnection);
-    nConnection++;
-    console.log(nConnection)
-    if(nConnection > 1) {
-        nConnection--;
-        return; 
+    if(nConnection < 2) {
+        io.sockets.emit("access", nConnection, socket.id);
+        ids.push(socket.id)
+        nConnection++;
     }
+    //else socket.broadcast.to(socket.id).emit('GoAway', "");
     socket.on('disconnect', reason => {
-        console.log(reason)
         nConnection--;
         io.sockets.emit("disconn", nConnection)
     })
 
-    socket.on('change', data => {
-        socket.broadcast.emit('change', data)
+    socket.on('change', (id, data) => {
+        if(id === ids[0]) socket.broadcast.to(ids[1]).emit('change', data);
+        else if(id === ids[1]) socket.broadcast.to(ids[0]).emit('change', data);
     })
 })

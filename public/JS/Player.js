@@ -76,7 +76,9 @@ class Player {
     }
 
     updSprite(enemy){
-        if((this._left <= 0 && this._spostamento == -1) || (this._right >= canvas.width && this._spostamento == 1)) this._move = false
+        if( (this._left <= 0 && this._spostamento == -1) || 
+            (this._right >= canvas.width && this._spostamento == 1)) this._move = false
+
         if(!this._reverse){
             if(this._attack){
                 this._actualSprite = this._sprite.attack
@@ -180,5 +182,12 @@ class Player {
         ctx.fillStyle = color
         ctx.textAlign = "center";
         ctx.fillText(`${this.constructor.name} Win`, canvas.width/2, canvas.height/2)
+    }
+
+    forSending(){
+        return [this._top, this._left, this._bottom, this._right,
+        this._reverse, this._move, this._jump, this._attack,
+        this._life[0], this._spostamento, this._fermo, this._col, 
+        this._actualSprite]
     }
 }
