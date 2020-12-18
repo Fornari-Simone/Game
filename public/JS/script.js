@@ -1,6 +1,6 @@
 
-//let socket = io.connect(`https://game-forno.herokuapp.com`)
-let socket = io.connect(`http://localhost:3000`)
+let socket = io.connect(`https://game-forno.herokuapp.com/`)
+//let socket = io.connect(`http://localhost:3000`)
 
 let player2;
 let player;
