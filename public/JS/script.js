@@ -11,6 +11,7 @@ let ctx = canvas.getContext("2d")
 socket.on("access", (nConn, id) => {
     //nConn = 1 => arrived 2nd player
     if(nConn === 1 && player != null){
+        console.log(`myID = ${myID}\nhisID = ${id}`)
         player2 = new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true)
     }else if(nConn === 1 && player == null){
         console.log(`myID = ${myID}\nhisID = ${id}`)
