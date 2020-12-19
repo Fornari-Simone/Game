@@ -13,6 +13,7 @@ socket.on("access", (nConn, id) => {
     if(nConn === 1 && player != null){
         player2 = new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true)
     }else if(nConn === 1 && player == null){
+        console.log(`myID = ${myID}\nhisID = ${id}`)
         myID = id
         player = new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true)
         player2 = new Ichigo(canvas.height - 40, 0, 55, 40, false)
