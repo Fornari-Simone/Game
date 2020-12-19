@@ -1,6 +1,6 @@
 
-let socket = io.connect(`https://game-forno.herokuapp.com/`)
-//let socket = io.connect(`http://localhost:3000`)
+//let socket = io.connect(`https://game-forno.herokuapp.com/`)
+let socket = io.connect(`http://localhost:3000`)
 
 let player2;
 let player;
@@ -12,17 +12,14 @@ socket.on("access", (nConn, id) => {
     //nConn = 1 => arrived 2nd player
     if(nConn === 1 && player != null){
         player2 = new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true)
-    }
-    else if(nConn === 1 && player == null){
+    }else if(nConn === 1 && player == null){
         myID = id
         player = new Vegeth(canvas.height - 65, canvas.width - 55, 55, 65, true)
         player2 = new Ichigo(canvas.height - 40, 0, 55, 40, false)
-    }
-    else{
+    }else{
         myID = id
         player = new Ichigo(canvas.height - 40, 0, 55, 40, false)
     }
-    console.log(myID)
 })
 socket.on("GoAway", data => GoAway=true)
 socket.on("disconn", data => {
@@ -57,7 +54,6 @@ function loop(){
         ctx.fillText(`Il canale è già occupato`, canvas.width/2, canvas.height/2);
         return;
     }else if(player == null || player2 == null) {
-        console.log("hello")
         window.requestAnimationFrame(loop);
     }else{
         ctx.clearRect(0, 0, canvas.width, canvas.height)
